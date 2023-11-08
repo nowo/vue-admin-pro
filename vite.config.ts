@@ -9,6 +9,7 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Unocss from 'unocss/vite'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 const alias: Record<string, string> = {
     '@': resolve(__dirname, 'src'), // 配置src的别名
@@ -56,6 +57,10 @@ const viteConfig = defineConfig((mode: ConfigEnv) => {
             // vueSetupExtend(),
             viteCompression(),
             // JSON.parse(env.VITE_OPEN_CDN) ? buildConfig.cdn() : null,
+            // 打包体积分析
+            visualizer({
+                open: true,
+            }),
         ],
         root: process.cwd(),
         resolve: { alias },
