@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia'
+import type { RouteRecordRaw } from 'vue-router'
 import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
 import { Session } from '@/utils/storage'
 import { ApiMenu } from '@/api/system/menu'
 import { ApiUser } from '@/api/system/user'
 import { deepClone } from '@/utils/other'
+import { backEndComponent } from '@/router/backEnd'
+import { findNodeItem } from '@/utils/common/tree'
 
 interface ISystemUserInfo {
     name: string
@@ -112,9 +115,9 @@ export const useUserInfo = defineStore('userInfo', () => {
                     children: [
                         {
                             path: '/system/menu',
-                            name: 'systemMenu',
+                            name: 'SystemMenu',
                             // component: () => import('@/views/system/menu/index.vue'),
-                            component: 'system/menu/index',
+                            component: 'system/menu/SystemMenu',
 
                             meta: {
                                 title: '菜单管理',
@@ -127,17 +130,39 @@ export const useUserInfo = defineStore('userInfo', () => {
                                 icon: 'iconfont icon-caidan',
                             },
                         },
+                        {
+                            path: '/system/role',
+                            name: 'SystemRole',
+                            component: 'system/role/SystemRole',
+                            meta: {
+                                title: '角色管理',
+                                isLink: false,
+                                isHide: false,
+                                isKeepAlive: true,
+                                isAffix: false,
+                                isIframe: false,
+                                roles: ['admin'],
+                                icon: 'ele-ColdDrink',
+                            },
+                        },
                     ],
                 },
             ]
             oldMenuList.value = deepClone(list)
+            // component转换
+            const child = await backEndComponent<RouteRecordRaw>(list)
 
-            // 设置路由数据
-            solveList = list
+            dynamicRoutes[0].children = child
+
+            // dynamicRoutes的首页路由重定向到`/home`,判断后端返回的路由是否有/home，没有就用子类的第一个进行跳转
+            const node = findNodeItem(child, dynamicRoutes[0].redirect, 'path', 'children')
+            if (!node) dynamicRoutes[0].redirect = dynamicRoutes[0].children?.[0].path
+
+            solveList = dynamicRoutes
         } else { // 前端路由
-            // dynamicRoutes
             solveList = dynamicRoutes
         }
+
         // notFoundAndNoPower 将 404、401 页面设置在 layout 布局中，不设置的话，404、401 界面将全屏显示
         solveList[0].children?.push(...notFoundAndNoPower)
         menuList.value = solveList

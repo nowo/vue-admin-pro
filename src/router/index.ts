@@ -4,7 +4,8 @@ import 'nprogress/nprogress.css'
 
 // import pinia from '@/stores/index'
 // import { useKeepALiveNames } from '@/stores/keepAliveNames'
-import { initFrontEndControlRoutes } from './frontEnd'
+import { initFrontEndControlRoutes } from '@/router/frontEnd'
+import { initBackEndControlRoutes } from '@/router/backEnd'
 import { notFoundAndNoPower, staticRoutes } from '@/router/route'
 import { Session } from '@/utils/storage'
 
@@ -152,7 +153,8 @@ router.beforeEach(async (to, from, next) => {
             const themeState = useThemeConfig()
 
             if (themeState.isRequestRoute) { // 后端控制路由
-
+                console.log(333)
+                initBackEndControlRoutes()
             } else { // 前端控制路由
                 console.log(111)
                 await initFrontEndControlRoutes()

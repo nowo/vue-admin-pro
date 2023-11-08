@@ -1,3 +1,6 @@
+/**
+ * 前端控制路由
+ */
 import type { RouteRecordRaw } from 'vue-router'
 import { dynamicRoutes, notFoundAndNoPower } from './route'
 import { formatFlatteningRoutes, router } from '@/router/index'
@@ -35,13 +38,7 @@ export async function initFrontEndControlRoutes() {
     await stores.getUserInfo()
 
     if (stores.userInfo?.roles.length && stores.userInfo?.roles.length > 0) {
-        // let route=notFoundAndNoPower
-        // stores.menuList[0].children?.push(...notFoundAndNoPower)
-        // console.log(JSON.parse(JSON.stringify(formatFlatteningRoutes(stores.menuList))))
-        // const routes = formatFlatteningRoutes(stores.menuList)
-        // console.log(JSON.parse(JSON.stringify(routes)))
-
-        // // 添加动态路由
+        // 添加动态路由
         await setAddRoute(stores.menuList)
         // 设置递归过滤有权限的路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
         // setFilterMenuAndCacheTagsViewRoutes()
