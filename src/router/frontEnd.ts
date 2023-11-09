@@ -42,8 +42,10 @@ export async function initFrontEndControlRoutes() {
         await setAddRoute(stores.menuList)
         // 设置递归过滤有权限的路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
         // setFilterMenuAndCacheTagsViewRoutes()
+        return true
     } else {
-        return Promise.resolve(true)
+        return false
+        // return Promise.resolve(true)
     }
 
     // // 无登录权限时，添加判断
