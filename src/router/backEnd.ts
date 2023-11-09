@@ -2,11 +2,9 @@
  * 后端控制路由
  */
 import type { RouteRecordRaw } from 'vue-router'
-import pinia from '@/stores/index'
 import { Session } from '@/utils/storage'
 import { NextLoading } from '@/utils/loading'
-import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
-import { formatFlatteningRoutes, router } from '@/router/index'
+import { router } from '@/router/index'
 
 // 后端控制路由
 

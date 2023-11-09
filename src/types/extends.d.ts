@@ -1,7 +1,6 @@
 /**
  * 第三方库类型扩展
  */
-import * as axios from 'axios'
 import 'vue-router'
 
 import type { GlobalComponents } from 'vue'
@@ -14,7 +13,7 @@ declare global {
     interface RouteRecordItem extends RouteRecordRaw {
 
     }
-    type RouteRecordCustom = RouteRecordRaw 
+    type RouteRecordCustom = RouteRecordRaw
 }
 
 // 扩展 axios 数据返回类型，可自行扩展

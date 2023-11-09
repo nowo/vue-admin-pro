@@ -1,7 +1,7 @@
 <template>
     <el-form size="large" class="login-content-form">
         <el-form-item class="login-animation1">
-            <el-input v-model="state.ruleForm.userName" text placeholder="请输入手机号" clearable autocomplete="off">
+            <el-input v-model="state.ruleForm.userName" placeholder="请输入手机号" clearable text autocomplete="off">
                 <template #prefix>
                     <i class="iconfont el-input__icon icon-dianhua" />
                 </template>

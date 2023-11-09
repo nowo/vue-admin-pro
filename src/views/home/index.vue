@@ -11,7 +11,6 @@
 </template>
 
 <script lang="ts" setup>
-import { defineComponent } from 'vue'
 import { Session } from '@/utils/storage'
 
 const onRemove = () => {

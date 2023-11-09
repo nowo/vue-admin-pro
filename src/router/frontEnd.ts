@@ -2,8 +2,7 @@
  * 前端控制路由
  */
 import type { RouteRecordRaw } from 'vue-router'
-import { dynamicRoutes, notFoundAndNoPower } from './route'
-import { formatFlatteningRoutes, router } from '@/router/index'
+import { router } from '@/router/index'
 import { NextLoading } from '@/utils/loading'
 import { Session } from '@/utils/storage'
 

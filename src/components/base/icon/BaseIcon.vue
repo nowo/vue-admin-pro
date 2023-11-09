@@ -16,7 +16,7 @@ const props = defineProps({
     // svg 图标组件名字
     name: {
         type: String,
-        required:true
+        required: true,
     },
     // svg 大小
     size: {

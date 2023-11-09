@@ -1,10 +1,6 @@
-import { defineAsyncComponent, nextTick } from 'vue'
+import { nextTick } from 'vue'
 import type { App } from 'vue'
-import * as svg from '@element-plus/icons-vue'
-import { storeToRefs } from 'pinia'
-import router from '@/router/index'
-import pinia from '@/stores/index'
-import { Local } from '@/utils/storage'
+import router from '@/router'
 
 // 引入组件
 // const SvgIcon = defineAsyncComponent(() => import('@/components/svgIcon/index.vue'))
@@ -22,25 +18,25 @@ export function elSvg(app: App) {
     // app.component('SvgIcon', SvgIcon)
 }
 
-/**
- * 设置浏览器标题国际化
- * @method const title = useTitle(); ==> title()
- */
-export function useTitle() {
-    const stores = useThemeConfig(pinia)
-    const { themeConfig } = storeToRefs(stores)
-    nextTick(() => {
-        let webTitle = ''
-        const globalTitle: string = themeConfig.value.globalTitle
-        const { path, meta } = router.currentRoute.value
-        if (path === '/login') {
-            webTitle = <string>meta.title
-        } else {
-            webTitle = setTagsViewNameI18n(router.currentRoute.value)
-        }
-        document.title = `${webTitle} - ${globalTitle}` || globalTitle
-    })
-}
+// /**
+//  * 设置浏览器标题国际化
+//  * @method setTitle()
+//  */
+// export function setTitle() {
+//     const stores = useThemeConfig(pinia)
+//     const { themeConfig } = storeToRefs(stores)
+//     nextTick(() => {
+//         let webTitle = ''
+//         const globalTitle: string = themeConfig.value.globalTitle
+//         const { path, meta } = router.currentRoute.value
+//         if (path === '/login') {
+//             webTitle = <string>meta.title
+//         } else {
+//             webTitle = setTagsViewNameI18n(router.currentRoute.value)
+//         }
+//         document.title = `${webTitle} - ${globalTitle}` || globalTitle
+//     })
+// }
 
 /**
  * 设置 自定义 tagsView 名称
@@ -166,9 +162,6 @@ export function handleOpenLink(val: RouteItem) {
 const other = {
     elSvg: (app: App) => {
         elSvg(app)
-    },
-    useTitle: () => {
-        useTitle()
     },
     setTagsViewNameI18n(route: RouteToFrom) {
         return setTagsViewNameI18n(route)
