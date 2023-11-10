@@ -13,7 +13,7 @@ export function wavesDirective(app: App) {
             function setConvertStyle(obj: { [key: string]: unknown }) {
                 let style: string = ''
                 for (const i in obj) {
-                    if (obj.hasOwnProperty(i)) style += `${i}:${obj[i]};`
+                    if (Object.prototype.hasOwnProperty.call(obj, i)) style += `${i}:${obj[i]};`
                 }
                 return style
             }
@@ -83,13 +83,13 @@ export function dragDirective(app: App) {
                 // 对话框宽度
                 const dragDomWidth = dragDom.offsetWidth
                 // 对话框高度
-                const dragDomheight = dragDom.offsetHeight
+                const dragDomHeight = dragDom.offsetHeight
 
                 const minDragDomLeft = dragDom.offsetLeft
                 const maxDragDomLeft = screenWidth - dragDom.offsetLeft - dragDomWidth
 
                 const minDragDomTop = dragDom.offsetTop
-                const maxDragDomTop = screenHeight - dragDom.offsetTop - dragDomheight
+                const maxDragDomTop = screenHeight - dragDom.offsetTop - dragDomHeight
 
                 // 获取到的值带px 正则匹配替换
                 let styL: any = getComputedStyle(dragDom).left

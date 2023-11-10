@@ -107,7 +107,7 @@ export const useThemeConfig = defineStore('themeConfig', () => {
         // 是否开启色弱模式
         isInvert: false,
         // 是否开启水印
-        isWatermark: false,
+        isWatermark: true,
         // 水印文案
         watermarkText: '水印文字',
 
