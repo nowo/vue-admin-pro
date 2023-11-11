@@ -9,7 +9,7 @@ import { directive } from '@/directive'
 // import other from '@/utils/other'
 
 import 'uno.css'
-import '@unocss/reset/tailwind.css'
+import '@unocss/reset/tailwind-compat.css'
 import '@/assets/scss/index.scss'
 
 const app = createApp(App)
