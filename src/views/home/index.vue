@@ -13,7 +13,13 @@
 <script lang="ts" setup>
 import { Session } from '@/utils/storage'
 
+const data = reactive({
+    name: 1,
+    id: 100,
+})
+
 const onRemove = () => {
+    const arr = [1, 2, 3, 5]
     Session.clear()
     location.reload()
 }

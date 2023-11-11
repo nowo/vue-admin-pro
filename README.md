@@ -20,6 +20,8 @@
 	<p>&nbsp;</p>
 </div>
 
+[![code style](https://antfu.me/badge-code-style.svg)](https://githubfast.com/antfu/eslint-config)
+
 #### 🌈 介绍
 
 基于 vue3.x + CompositionAPI setup 语法糖 + typescript + vite + element plus + vue-router-next + pinia 技术，

@@ -4,8 +4,8 @@ import unocss from '@unocss/eslint-plugin'
 export default antfu(
     {
         stylistic: {
-            indent: 4, // 4, or 'tab'
-            quotes: 'single', // or 'double'
+            indent: 4, // 4, or 'tab'   使用4个空格缩进风格
+            quotes: 'single', // or 'double'    单引号
         },
         // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
         ignores: [
@@ -30,15 +30,6 @@ export default antfu(
     unocss.configs.flat,
     {
         rules: {
-            // 保存代码时缩进4个空格
-            // 'indent': [
-            //     'error',
-            //     4,
-            //     {
-            //         SwitchCase: 1,
-            //     },
-            // ],
-            // 'indent': ['error', 4],
             'no-console': [
                 'warn',
                 {
@@ -46,32 +37,9 @@ export default antfu(
                 },
             ],
             'curly': ['error', 'multi-line', 'consistent'],
-            // 'brace-style': ['error', '1tbs', { allowSingleLine: true }],
             'style/brace-style': ['error', '1tbs', { allowSingleLine: true }],
-
-            // 'jsonc/indent': ['error', 4],
-            // 'style/indent': ['error', 4],
-
-            // '@typescript-eslint/brace-style': [
-            //     'error',
-            //     '1tbs',
-            //     // {
-            //     //   "allowSingleLine": true
-            //     // }
-            // ],
-            // '@typescript-eslint/indent': 'off',
-            // '@typescript-eslint/no-use-before-define': [
-            //     'error',
-            //     {
-            //         variables: false,
-            //     },
-            // ],
             'antfu/if-newline': 'off', // 允许if(a==1) return 1  这种单行的格式
             'antfu/top-level-function': 'off',
-            // 'vue/component-tags-order': [
-            //     'error',
-            //     { order: ['template', 'script', 'style'] },
-            // ],
             'vue/block-order': ['error', { order: ['template', 'script', 'style'] }],
             'vue/first-attribute-linebreak': [
                 'warn',
@@ -92,9 +60,6 @@ export default antfu(
                     alignAttributesVertically: false,
                 },
             ],
-            'vue/dot-location': 'off',
-            'vue/comma-dangle': ['error', 'only-multiline'],
-            'vue/object-curly-newline': ['warn', 'never'],
             'unused-imports/no-unused-vars': [
                 'warn',
                 {
@@ -105,10 +70,7 @@ export default antfu(
                     argsIgnorePattern: '^',
                 },
             ],
-            // 'max-statements-per-line': ['error', { max: 2 }],
             'node/prefer-global/process': ['error', 'always'],
-            'function-call-argument-newline': ['error', 'consistent'],
-
         },
     },
 )

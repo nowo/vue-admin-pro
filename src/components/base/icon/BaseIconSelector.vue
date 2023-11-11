@@ -39,8 +39,9 @@
 <script setup lang="ts" name="iconSelector">
 import { computed, defineAsyncComponent, nextTick, onMounted, reactive, ref, watch } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
-import initIconfont from '/@/utils/getStyleSheets'
-import '/@/theme/iconSelector.scss'
+
+// import initIconfont from '@/utils/getStyleSheets'
+import '@/theme/iconSelector.scss'
 
 // const pa = defineProps<{
 //     // 输入框前置内容
@@ -201,25 +202,25 @@ const initFontIconName = () => {
 }
 // 初始化数据
 const initFontIconData = async (name: string) => {
-    if (name === 'ali') {
-        // 阿里字体图标使用 `iconfont xxx`
-        if (state.fontIconList.ali.length > 0) return
-        await initIconfont.ali().then((res: any) => {
-            state.fontIconList.ali = res.map((i: string) => `iconfont ${i}`)
-        })
-    } else if (name === 'ele') {
-        // element plus 图标
-        if (state.fontIconList.ele.length > 0) return
-        await initIconfont.ele().then((res: any) => {
-            state.fontIconList.ele = res
-        })
-    } else if (name === 'awe') {
-        // fontawesome字体图标使用 `fa xxx`
-        if (state.fontIconList.awe.length > 0) return
-        await initIconfont.awe().then((res: any) => {
-            state.fontIconList.awe = res.map((i: string) => `fa ${i}`)
-        })
-    }
+    // if (name === 'ali') {
+    //     // 阿里字体图标使用 `iconfont xxx`
+    //     if (state.fontIconList.ali.length > 0) return
+    //     await initIconfont.ali().then((res: any) => {
+    //         state.fontIconList.ali = res.map((i: string) => `iconfont ${i}`)
+    //     })
+    // } else if (name === 'ele') {
+    //     // element plus 图标
+    //     if (state.fontIconList.ele.length > 0) return
+    //     await initIconfont.ele().then((res: any) => {
+    //         state.fontIconList.ele = res
+    //     })
+    // } else if (name === 'awe') {
+    //     // fontawesome字体图标使用 `fa xxx`
+    //     if (state.fontIconList.awe.length > 0) return
+    //     await initIconfont.awe().then((res: any) => {
+    //         state.fontIconList.awe = res.map((i: string) => `fa ${i}`)
+    //     })
+    // }
     // 初始化 input 的 placeholder
     // 参考（单项数据流）：https://cn.vuejs.org/v2/guide/components-props.html?#%E5%8D%95%E5%90%91%E6%95%B0%E6%8D%AE%E6%B5%81
     state.fontIconPlaceholder = props.placeholder

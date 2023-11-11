@@ -461,20 +461,19 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useChangeColor } from '@/utils/theme'
+import { getDarkColor, getLightColor } from '@/utils/common/color'
 import { verifyAndSpace } from '@/utils/toolsValidate'
 import { Local } from '@/utils/storage'
 import Watermark from '@/utils/watermark'
-import other from '@/utils/other'
-import mittBus from '@/utils/mitt'
 
 // 定义变量内容
 const storesThemeConfig = useThemeConfig()
 const { themeConfig, isDrawer } = storeToRefs(storesThemeConfig)
 const { copy } = useClipboard({ legacy: true })
-const { getLightColor, getDarkColor } = useChangeColor()
+
 const state = reactive({
     isMobile: false,
+    test: '',
 })
 
 // 获取布局配置信息
@@ -503,6 +502,7 @@ const onColorPickerChange = () => {
     for (let i = 1; i <= 9; i++) {
         document.documentElement.style.setProperty(`--el-color-primary-light-${i}`, `${getLightColor(getThemeConfig.value.primary, i / 10)}`)
     }
+
     // setDispatchThemeConfig()
     setLocalThemeConfig()
     setLocalThemeConfigStyle()
@@ -541,6 +541,7 @@ const onBgColorPickerChange = (bg: keyof IThemeConfigState) => {
     if (bg === 'menuBar') {
         document.documentElement.style.setProperty(`--next-bg-menuBar-light-1`, getLightColor(getThemeConfig.value.menuBar, 0.05))
     }
+
     onTopBarGradualChange()
     onMenuBarGradualChange()
     onColumnsMenuBarGradualChange()
@@ -566,7 +567,7 @@ const onIsFixedHeaderChange = () => {
 const onClassicSplitMenuChange = () => {
     getThemeConfig.value.isBreadcrumb = false
     setLocalThemeConfig()
-    mittBus.emit('getBreadcrumbIndexSetFilterRoutes')
+    // mittBus.emit('getBreadcrumbIndexSetFilterRoutes')
 }
 // 4、界面显示 --> 侧边栏 Logo
 const onIsShowLogoChange = () => {
@@ -578,16 +579,17 @@ const onIsBreadcrumbChange = () => {
     if (getThemeConfig.value.layout === 'classic') {
         getThemeConfig.value.isClassicSplitMenu = false
     }
+
     setLocalThemeConfig()
 }
 // 4、界面显示 --> 开启 TagsView 拖拽
 const onSortableTagsViewChange = () => {
-    mittBus.emit('openOrCloseSortable')
+    // mittBus.emit('openOrCloseSortable')
     setLocalThemeConfig()
 }
 // 4、界面显示 --> 开启 TagsView 共用
 const onShareTagsViewChange = () => {
-    mittBus.emit('openShareTagsView')
+    // mittBus.emit('openShareTagsView')
     setLocalThemeConfig()
 }
 // 4、界面显示 --> 灰色模式/色弱模式
@@ -688,12 +690,12 @@ onMounted(() => {
         if (!Local.get('frequency')) initLayoutChangeFun()
         Local.set('frequency', 1)
         // 监听窗口大小改变，非默认布局，设置成默认布局（适配移动端）
-        mittBus.on('layoutMobileResize', (res: LayoutMobileResize) => {
-            getThemeConfig.value.layout = res.layout
-            isDrawer.value = false
-            initLayoutChangeFun()
-            state.isMobile = other.isMobile()
-        })
+        // mittBus.on('layoutMobileResize', (res: LayoutMobileResize) => {
+        //     getThemeConfig.value.layout = res.layout
+        //     isDrawer.value = false
+        //     initLayoutChangeFun()
+        //     state.isMobile = other.isMobile()
+        // })
         setTimeout(() => {
             // 默认样式
             onColorPickerChange()
@@ -711,7 +713,7 @@ onMounted(() => {
     })
 })
 onUnmounted(() => {
-    mittBus.off('layoutMobileResize', () => { })
+    // mittBus.off('layoutMobileResize', () => { })
 })
 
 // 暴露变量

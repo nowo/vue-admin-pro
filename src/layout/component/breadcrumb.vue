@@ -1,20 +1,19 @@
 <template>
     <div v-if="isShowBreadcrumb" class="layout-breadcrumb">
-        <SvgIcon class="layout-breadcrumb-expand" :name="themeConfig.isCollapse ? 'ele-Expand' : 'ele-Fold'"
-            :size="16" @click="onThemeConfigChange" />
+        <SvgIcon class="layout-breadcrumb-expand" :name="themeConfig.isCollapse ? 'ele-Expand' : 'ele-Fold'" :size="16"
+            @click="onThemeConfigChange" />
         <el-breadcrumb class="layout-breadcrumb-hide">
             <transition-group name="breadcrumb">
                 <el-breadcrumb-item v-for="(v, k) in state.breadcrumbList"
                     :key="!v.meta.tagsViewName ? v.meta.title : v.meta.tagsViewName">
                     <span v-if="k === state.breadcrumbList.length - 1" class="layout-breadcrumb-span">
-                        <SvgIcon v-if="themeConfig.isBreadcrumbIcon" :name="v.meta.icon"
-                            class="layout-breadcrumb-icon" />
+                        <SvgIcon v-if="themeConfig.isBreadcrumbIcon" :name="v.meta.icon" class="layout-breadcrumb-icon" />
                         <div v-if="!v.meta.tagsViewName">{{ v.meta.title }}</div>
                         <div v-else>{{ v.meta.tagsViewName }}</div>
                     </span>
                     <a v-else @click.prevent="onBreadcrumbClick(v)">
-                        <SvgIcon v-if="themeConfig.isBreadcrumbIcon" :name="v.meta.icon"
-                            class="layout-breadcrumb-icon" />{{ v.meta.title }}
+                        <SvgIcon v-if="themeConfig.isBreadcrumbIcon" :name="v.meta.icon" class="layout-breadcrumb-icon" />{{
+                            v.meta.title }}
                     </a>
                 </el-breadcrumb-item>
             </transition-group>
@@ -22,20 +21,14 @@
     </div>
 </template>
 
-<script setup lang="ts" name="layoutBreadcrumb">
-import { computed, onMounted, reactive } from 'vue'
-import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
-import { Local } from '/@/utils/storage'
-import other from '/@/utils/other'
+<script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useThemeConfig } from '/@/stores/themeConfig'
-import { useRoutesList } from '/@/stores/routesList'
+import { Local } from '@/utils/storage'
 
 // 定义变量内容
-const stores = useRoutesList()
+
 const storesThemeConfig = useThemeConfig()
 const { themeConfig } = storeToRefs(storesThemeConfig)
-const { routesList } = storeToRefs(stores)
 const route = useRoute()
 const router = useRouter()
 const state = reactive<BreadcrumbState>({
@@ -84,17 +77,17 @@ const getBreadcrumbList = (arr: RouteItems) => {
 }
 // 当前路由字符串切割成数组，并删除第一项空内容
 const initRouteSplit = (path: string) => {
-    if (!themeConfig.value.isBreadcrumb) return false
-    state.breadcrumbList = [routesList.value[0]]
-    state.routeSplit = path.split('/')
-    state.routeSplit.shift()
-    state.routeSplitFirst = `/${state.routeSplit[0]}`
-    state.routeSplitIndex = 1
-    getBreadcrumbList(routesList.value)
-    if (route.name === 'home' || (route.name === 'notFound' && state.breadcrumbList.length > 1)) state.breadcrumbList.shift()
-    if (state.breadcrumbList.length > 0) {
-        state.breadcrumbList[state.breadcrumbList.length - 1].meta.tagsViewName = other.setTagsViewNameI18n(route)
-    }
+    // if (!themeConfig.value.isBreadcrumb) return false
+    // state.breadcrumbList = [routesList.value[0]]
+    // state.routeSplit = path.split('/')
+    // state.routeSplit.shift()
+    // state.routeSplitFirst = `/${state.routeSplit[0]}`
+    // state.routeSplitIndex = 1
+    // getBreadcrumbList(routesList.value)
+    // if (route.name === 'home' || (route.name === 'notFound' && state.breadcrumbList.length > 1)) state.breadcrumbList.shift()
+    // if (state.breadcrumbList.length > 0) {
+    //     state.breadcrumbList[state.breadcrumbList.length - 1].meta.tagsViewName = other.setTagsViewNameI18n(route)
+    // }
 }
 // 页面加载时
 onMounted(() => {

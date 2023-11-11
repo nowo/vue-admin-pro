@@ -1,25 +1,24 @@
 <template>
     <el-main class="layout-main"
         :style="isFixedHeader ? `height: calc(100% - ${setMainHeight})` : `minHeight: calc(100% - ${setMainHeight})`">
-        <ElScrollbar ref="layoutMainScrollbarRef" class="layout-main-scroll layout-backtop-header-fixed"
+        <el-scrollbar ref="layoutMainScrollbarRef" class="layout-main-scroll layout-backtop-header-fixed"
             wrap-class="layout-main-scroll" view-class="layout-main-scroll">
             <LayoutParentView />
             <!-- <LayoutFooter v-if="isFooter" /> -->
-        </ElScrollbar>
+        </el-scrollbar>
         <el-backtop :target="setBacktopClass" />
     </el-main>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { ElScrollbar } from 'element-plus'
 import { NextLoading } from '@/utils/loading'
 
 // 引入组件
 const LayoutParentView = defineAsyncComponent(() => import('@/layout/route/parent.vue'))
 
 // 定义变量内容
-const layoutMainScrollbarRef = ref<InstanceType<typeof ElScrollbar>>()
+const layoutMainScrollbarRef = ref<ComponentInstance['ElScrollbar']>()
 const route = useRoute()
 const storesThemeConfig = useThemeConfig()
 const { themeConfig } = storeToRefs(storesThemeConfig)

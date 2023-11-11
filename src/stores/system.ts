@@ -14,7 +14,7 @@ interface ISystemUserInfo {
 
 /**
  * 用户信息
- * @methods setUserInfos 设置用户信息
+ * @methods getUserInfo 设置用户信息
  */
 export const useUserInfo = defineStore('userInfo', () => {
     const onOff = ref(Session.get('adm') === 'adm')

@@ -67,7 +67,7 @@ export async function setAddRoute(list: RouteRecordRaw[]) {
 /**
  * 后端控制路由：初始化方法，防止刷新时路由丢失
  * @method NextLoading 界面 loading 动画开始执行
- * @method useUserInfo().setUserInfos() 触发初始化用户信息 pinia
+ * @method useUserInfo().getUserInfo() 触发初始化用户信息 pinia
  * @method setAddRoute 添加动态路由
  * @method setFilterMenuAndCacheTagsViewRoutes 设置路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
  */

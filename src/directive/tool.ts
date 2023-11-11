@@ -4,7 +4,7 @@
  * @param oldArr 源数据
  * @returns 两数组相同返回 `true`，反之则反
  */
-export function judgmentSameArr<T>(newArr: T[], oldArr: T[]): boolean {
+export function judgmentSameArr<T = string>(newArr: T[], oldArr: T[]): boolean {
     // 去重处理
     const news = [...new Set(newArr)]
     const olds = [...new Set(oldArr)]

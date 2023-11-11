@@ -11,15 +11,12 @@ import { directive } from '@/directive'
 import 'uno.css'
 import '@/assets/scss/index.scss'
 
-// import '@/theme/index.scss'
-
 const app = createApp(App)
 
 directive(app)
 // other.elSvg(app)
 
 app.use(createPinia())
-
 app.use(router)
 
 app.mount('#app')
