@@ -23,7 +23,7 @@ export function judgmentSameArr<T = string>(newArr: T[], oldArr: T[]): boolean {
  * @returns 有权限，返回 `true`，反之则反
  */
 export function auth(value: string): boolean {
-    const stores = useUserInfo()
+    const stores = useUserStore()
     return !!stores.userInfo?.authBtnList.includes(value)
 }
 
@@ -33,7 +33,7 @@ export function auth(value: string): boolean {
  * @returns 有权限，返回 `true`，反之则反
  */
 export function auths(value: Array<string>): boolean {
-    const stores = useUserInfo()
+    const stores = useUserStore()
 
     const flag = stores.userInfo?.authBtnList.find(item => value.includes(item))
     return !!flag
@@ -45,6 +45,6 @@ export function auths(value: Array<string>): boolean {
  * @returns 有权限，返回 `true`，反之则反
  */
 export function authAll(value: Array<string>): boolean {
-    const stores = useUserInfo()
+    const stores = useUserStore()
     return judgmentSameArr(value, stores.userInfo?.authBtnList || [])
 }

@@ -1,11 +1,11 @@
 <template>
-    <el-container class="layout-container flex-center">
-        <!-- <LayoutHeader /> -->
-        头部
-        <el-container class="layout-main-height-50">
-            <!-- <LayoutAside /> -->
-            菜单
-            <div class="flex-center layout-backtop">
+    <el-container direction="vertical" class="layout-container h-100%">
+        <LayoutHeader />
+        <!-- 头部 -->
+        <el-container>
+            <LayoutAside />
+            <!-- 菜单 -->
+            <div class="layout-backtop flex-center">
                 <!-- <LayoutTagsView v-if="themeConfig.isTagsView" /> -->
 
                 标签、
@@ -18,4 +18,6 @@
 
 <script setup lang="ts">
 const LayoutMain = defineAsyncComponent(() => import('@/layout/component/main.vue'))
+const LayoutAside = defineAsyncComponent(() => import('@/layout/component/aside.vue'))
+const LayoutHeader = defineAsyncComponent(() => import('@/layout/component/header.vue'))
 </script>

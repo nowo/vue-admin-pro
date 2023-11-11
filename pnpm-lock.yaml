@@ -8,6 +8,9 @@ dependencies:
   '@element-plus/icons-vue':
     specifier: ^2.1.0
     version: 2.1.0(vue@3.3.8)
+  '@unocss/reset':
+    specifier: ^0.57.3
+    version: 0.57.3
   '@vueuse/core':
     specifier: ^10.5.0
     version: 10.5.0(vue@3.3.8)
@@ -1403,6 +1406,10 @@ packages:
   /@unocss/reset@0.57.2:
     resolution: {integrity: sha512-e9N5R9ZqbBhePa5ehK63LhU57nlgP3MSG4zblXv61SzBm1xIoTuhj7HX3OVJaMeDsrgazRlndSYNhSfD/ziPxg==}
     dev: true
+
+  /@unocss/reset@0.57.3:
+    resolution: {integrity: sha512-E6Q8jucQlVLOM+d+F5DKGi/8GVc8KDwAQnbcpbrGL/1iix4IM3emRkPmujgTLWS+HIRRcWcEvT6sNwnd9r6H2A==}
+    dev: false
 
   /@unocss/rule-utils@0.57.2:
     resolution: {integrity: sha512-fgAc5gkZo8JLDe9vMisofSck3k1nN05+kblKhrEaq/+gS5bxHzL9VNExtiTbT00wyMKGjak/uC7qDMbdVmUhYg==}

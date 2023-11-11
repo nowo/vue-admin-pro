@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import type { RouteRecordRaw } from 'vue-router'
+import { filterRoutesFunc } from '@/router'
 import { dynamicRoutes, notFoundAndNoPower } from '@/router/route'
+import { backEndComponent } from '@/router/backEnd'
 import { Session } from '@/utils/storage'
 import { ApiMenu } from '@/api/system/menu'
 import { ApiUser } from '@/api/system/user'
 import { deepClone } from '@/utils/other'
-import { backEndComponent } from '@/router/backEnd'
 import { findNodeItem } from '@/utils/common/tree'
 
 interface ISystemUserInfo {
@@ -16,8 +17,8 @@ interface ISystemUserInfo {
  * 用户信息
  * @methods getUserInfo 设置用户信息
  */
-export const useUserInfo = defineStore('userInfo', () => {
-    const onOff = ref(Session.get('adm') === 'adm')
+export const useUserStore = defineStore('userInfo', () => {
+    const onOff = ref(Session.get('adm') !== 'adm')
 
     // 用户信息
     const userInfo = ref<IUserInfo<ISystemUserInfo>>()
@@ -27,6 +28,11 @@ export const useUserInfo = defineStore('userInfo', () => {
 
     // 存储接口原始路由（未处理的component）
     const oldMenuList = ref<any[]>([])
+
+    // 过滤后的路由
+    const routesList = computed(() => {
+        return filterRoutesFunc(menuList.value)
+    })
 
     /**
      * 获取用户的权限菜单
@@ -270,6 +276,7 @@ export const useUserInfo = defineStore('userInfo', () => {
         userInfo,
         menuList,
         oldMenuList,
+        routesList,
         getUserInfo,
         getAuthMenuList,
     }

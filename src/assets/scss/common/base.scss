@@ -1,10 +1,33 @@
 /* 初始化样式
 ------------------------------- */
+
+:root {
+    --co-color-white: #ffffff;
+    --co-bg-main-color: #f8f8f8;
+    --co-bg-color: #f5f5ff;
+    --co-border-color-light: #f1f2f3;
+    --co-color-primary-lighter: #ecf5ff;
+    --co-color-success-lighter: #f0f9eb;
+    --co-color-warning-lighter: #fdf6ec;
+    --co-color-danger-lighter: #fef0f0;
+    --co-color-dark-hover: #0000001a;
+    --co-color-menu-hover: rgba(0, 0, 0, 0.2);
+    --co-color-user-hover: rgba(0, 0, 0, 0.04);
+    --co-color-setting-main: #e9eef3;
+    --co-color-setting-aside: #d3dce6;
+    --co-color-setting-header: #b3c0d1;
+
+
+    --el-aside-width:220px;
+    --co-menu-bg-color: #272f3b;
+    --co-menu-text-color:#fff;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    // outline: none !important;
+    outline: none;
 }
 
 

@@ -1,3 +1,4 @@
+import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -127,6 +128,19 @@ export function transformLevelArr<T = any>(classifyList: Array<T>, id = 'id' as 
 //     return newArr
 // }
 
+/**
+ * 路由过滤递归函数，过滤隐藏路由
+ * @param arr
+ * @returns array
+ */
+export const filterRoutesFunc = (arr: RouteRecordRaw[]): RouteRecordRaw[] => {
+    return arr.filter(item => !item.meta?.isHide).map((item) => {
+        item = Object.assign({}, item)
+        if (item.children) item.children = filterRoutesFunc(item.children)
+        return item
+    })
+}
+
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
     NProgress.configure({ showSpinner: false })
@@ -145,7 +159,7 @@ router.beforeEach(async (to, from, next) => {
     } else if (token && to.path === '/login') { // 有token，又在登录页时，直接进入首页
         next('/')
     } else {
-        const userState = useUserInfo()
+        const userState = useUserStore()
         if (userState.menuList.length === 0) {
             const themeState = useThemeConfig()
 

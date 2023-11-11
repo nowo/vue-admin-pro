@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-drawer v-model="isDrawer" title="布局配置" direction="rtl" destroy-on-close size="260px" @close="onDrawerClose">
-            <el-scrollbar class="px15px">
+            <el-scrollbar class="px20px -mx20px">
                 <!-- 全局主题 -->
                 <el-divider content-position="left">
                     全局主题
@@ -441,15 +441,15 @@
                 <div class="my10px">
                     <el-button size="default" class="w100%" type="primary" @click="onCopyConfigClick">
                         <el-icon class="mr5px">
-                            <ele-CopyDocument />
+                            <i class="i-ep:copy-document" />
                         </el-icon>
                         一键复制配置
                     </el-button>
                 </div>
                 <div class="my10px">
                     <el-button size="default" class="w100%" type="info" @click="onResetConfigClick">
-                        <el-icon class="mr5">
-                            <ele-RefreshRight />
+                        <el-icon class="mr5px">
+                            <i class="i-ep:refresh-right" />
                         </el-icon>
                         一键恢复默认
                     </el-button>
@@ -625,11 +625,11 @@ const onWatermarkTextInput = (val: string) => {
 }
 // 5、布局切换
 const onSetLayout = (layout: IThemeConfigState['layout']) => {
-    Local.set('oldLayout', layout)
     if (getThemeConfig.value.layout === layout) return false
+    Local.set('oldLayout', layout)
     if (layout === 'transverse') getThemeConfig.value.isCollapse = false
     getThemeConfig.value.layout = layout
-    isDrawer.value = false
+    // isDrawer.value = false
     // initLayoutChangeFun()
 }
 // 设置布局切换函数
@@ -772,19 +772,19 @@ defineExpose({
     }
 
     .layout-pane-aside-dark {
-        background-color: var(--next-color-setting-header);
+        background-color: var(--el-color-info-light-5);
     }
 
     .layout-pane-aside {
-        background-color: var(--next-color-setting-aside);
+        background-color: var(--el-color-info-light-7);
     }
 
     .layout-pane-header {
-        background-color: var(--next-color-setting-header);
+        background-color: var(--el-color-info-light-5);
     }
 
     .layout-pane-main {
-        background-color: var(--next-color-setting-main);
+        background-color: var(--el-fill-color-lighter);
     }
 
 }
