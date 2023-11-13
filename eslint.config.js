@@ -71,6 +71,12 @@ export default antfu(
                 },
             ],
             'node/prefer-global/process': ['error', 'always'],
+            'ts/no-use-before-define': ['error', {
+                // functions: true,
+                // classes: true,
+                variables: false,
+                // allowNamedExports: false,
+            }],
         },
     },
 )
