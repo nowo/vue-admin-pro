@@ -5,7 +5,7 @@
         <el-container>
             <LayoutAside />
             <!-- 菜单 -->
-            <div class="layout-backtop flex-center">
+            <div class="layout-backtop">
                 <!-- <LayoutTagsView v-if="themeConfig.isTagsView" /> -->
 
                 标签、

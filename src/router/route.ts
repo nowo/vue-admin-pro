@@ -15,6 +15,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
         redirect: '/home',
         meta: {
             isKeepAlive: true,
+            title: '首页',
         },
         children: [
             {
