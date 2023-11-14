@@ -1,11 +1,8 @@
-import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
-// import { useKeepALiveNames } from '@/stores/keepAliveNames'
-import { initFrontEndControlRoutes } from '@/router/frontEnd'
-import { initBackEndControlRoutes } from '@/router/backEnd'
+import { initBackEndControlRoutes, initFrontEndControlRoutes } from '@/router/control'
 import { notFoundAndNoPower, staticRoutes } from '@/router/route'
 import { Session } from '@/utils/storage'
 
@@ -72,29 +69,6 @@ export function formatFlatteningRoutes<T = any>(arr: T[]) {
 }
 
 /**
- * 树形json数据数组转平级普通数组
- * @param classifyList 嵌套数组
- * @param id 关联的键值，默认id
- * @param key 上级所属的键值，默认pid
- * @param children 嵌套数组的子类，子类的键值，默认children
- * @returns any[]
- */
-export function transformLevelArr<T = any>(classifyList: Array<T>, id = 'id' as keyof T, key = 'pid', children = 'children' as keyof T): T[] {
-    const temp: any[] = []
-    const forFn = function (arr: string | any[], val = 0) {
-        for (let i = 0; i < arr.length; i++) {
-            const item = arr[i]
-            if (val) item[key] = val
-            temp.push(item)
-
-            if (item[children]) forFn(item[children], item[id])
-        }
-    }
-    forFn(classifyList)
-    return temp
-}
-
-/**
  * 一维数组处理成多级嵌套数组（只保留二级：也就是二级以上全部处理成只有二级，keep-alive 支持二级缓存）
  * @description isKeepAlive 处理 `name` 值，进行缓存。顶级关闭，全部不缓存
  * @link 参考：https://v3.cn.vuejs.org/api/built-in-components.html#keep-alive
@@ -127,19 +101,6 @@ export function transformLevelArr<T = any>(classifyList: Array<T>, id = 'id' as 
 //     })
 //     return newArr
 // }
-
-/**
- * 路由过滤递归函数，过滤隐藏路由
- * @param arr
- * @returns array
- */
-export const filterRoutesFunc = (arr: RouteRecordRaw[]): RouteRecordRaw[] => {
-    return arr.filter(item => !item.meta?.isHide).map((item) => {
-        item = Object.assign({}, item)
-        if (item.children) item.children = filterRoutesFunc(item.children)
-        return item
-    })
-}
 
 // 路由加载前
 router.beforeEach(async (to, from, next) => {
