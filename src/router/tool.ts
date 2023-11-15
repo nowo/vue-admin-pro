@@ -43,11 +43,18 @@ export function transformLevelArr<T = any>(classifyList: Array<T>, id = 'id' as 
  * @param arr 动态添加的路由
  */
 export async function setFilterMenuToTagViewRoutes(arr: RouteRecordRaw[]) {
-    // 转平级数组
-    const list = transformLevelArr(arr).filter(item => item.meta?.isAffix)
-
     const tagState = useTagViewRoutes()
-    tagState.setTagViewRoutes(list)
+    // 转平级数组
+    const list = transformLevelArr(arr)
+
+    // 取得固定的页面，并且取得对应项不存在缓存中的项
+    const filterList = list.filter(item => item.meta?.isAffix).filter((item) => {
+        const node = tagState.tagViewRoutes.find(opt => opt.path === item.path)
+        return !node
+    })
+
+    // 设置新的tagView列表
+    tagState.setTagViewRoutes([...tagState.tagViewRoutes, ...filterList])
 }
 
 /**

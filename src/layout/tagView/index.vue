@@ -2,7 +2,7 @@
     <div class="layout-navbar-tagsView" :class="{ 'layout-navbar-tagsView-shadow': getThemeConfig.layout === 'classic' }">
         <el-scrollbar ref="scrollbarRef">
             <ul ref="tagsUlRef" class="layout-navbar-tagsView-ul" :class="setTagsStyle">
-                <li v-for="(v, k) in state.tagsViewList" :key="k" ref="tagsRef">
+                <li v-for="(v, k) in tagViewState.tagViewRoutes" :key="k" ref="tagsRef">
                     {{ v.meta?.title }}
                 </li>
                 <!-- <li v-for="(v, k) in state.tagsViewList" :key="k" :ref="(el: any) => { if (el) tagsRefs[k] = el; }
@@ -41,44 +41,22 @@ import { Session } from '@/utils/storage'
 const Contextmenu = defineAsyncComponent(() => import('@/layout/tagView/contextmenu.vue'))
 // const TagFullClose = defineAsyncComponent(() => import('@/layout/navBars/breadcrumb/closeFull.vue'))
 
-// 定义接口来定义对象的类型
-interface TagsViewState {
-    routeActive: string
-    routePath: string | unknown
-    dropdown: {
-        x: number
-        y: number
-    }
-    sortable: any
-    tagsRefsIndex: number
-    tagsViewList: any[]
-    tagsViewRoutesList: any[]
-}
 interface RouteParams {
     path: string
     url: string
     query: object
     params: object
 }
-interface CurrentContextmenu {
-    meta: {
-        isDynamic: boolean
-    }
-    params: any
-    query: any
-    path: string
-    contextMenuClickId: string | number
-}
 
 const tagsRef = ref<HTMLLIElement[]>([])
 const scrollbarRef = ref<ComponentInstance['ElScrollbar']>()
 const contextmenuRef = ref<InstanceType<typeof Contextmenu>>()
 const tagsUlRef = ref<HTMLUListElement>()
-const stores = useTagViewRoutes()
+
 const storesThemeConfig = useThemeConfig()
-const storesTagsViewRoutes = useTagViewRoutes()
+const tagViewState = useTagViewRoutes()
 const { themeConfig } = storeToRefs(storesThemeConfig)
-const { tagViewRoutes } = storeToRefs(storesTagsViewRoutes)
+const { tagViewRoutes } = storeToRefs(tagViewState)
 const storesKeepALiveNames = useKeepAliveNames()
 const route = useRoute()
 const router = useRouter()
@@ -136,7 +114,7 @@ const getTagsViewRoutes = async () => {
 }
 // vuex 中获取路由信息：如果是设置了固定的（isAffix），进行初始化显示
 const initTagsView = async () => {
-    const list = Session.get<RouteRecordCustom[]>('tagsViewList')
+    const list = Session.get<RouteRecordCustom[]>('tagViewRoutes')
     if (list && getThemeConfig.value.isCacheTagsView) {
         state.tagsViewList = list
     } else {
@@ -172,9 +150,14 @@ onMounted(() => {
 })
 
 // 监听路由的变化，动态赋值给 tagsView
-watch(tagViewRoutes, (val) => {
-    if (val.length === state.tagsViewRoutesList.length) return false
-    getTagsViewRoutes()
+// watch(tagViewRoutes, (val) => {
+//     if (val.length === state.tagsViewRoutesList.length) return false
+//     getTagsViewRoutes()
+// })
+
+onBeforeRouteUpdate((val) => {
+    console.log(val)
+    tagViewState.addTagViewRoutes(val as unknown as RouteRecordCustom)
 })
 
 // // 监听路由的变化，动态赋值给 tagsView

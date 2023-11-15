@@ -10,11 +10,26 @@ import { Session } from '@/utils/storage'
 export const useTagViewRoutes = defineStore('tagViewRoutes', () => {
     const isTagsViewCurrentFull = ref(false)
 
-    const tagViewRoutes = ref<RouteRecordRaw[]>([])
+    const tagViewRoutes = ref<RouteRecordRaw[]>(Session.get('tagViewRoutes') || [])
 
     const setTagViewRoutes = (data: Array<RouteRecordRaw>) => {
         tagViewRoutes.value = data
+
+        Session.set('tagViewRoutes', tagViewRoutes.value)
     }
+
+    /**
+     * 添加tagView路由
+     * @param data route对象
+     */
+    const addTagViewRoutes = (data: RouteRecordRaw) => {
+        const node = tagViewRoutes.value.find(item => item.path === data.path)
+        if (!node) {
+            tagViewRoutes.value.push(data)
+            Session.set('tagViewRoutes', tagViewRoutes.value)
+        }
+    }
+
     const setCurrentFullscreen = (bool: boolean) => {
         Session.set('isTagsViewCurrentFull', bool)
         isTagsViewCurrentFull.value = bool
@@ -24,6 +39,7 @@ export const useTagViewRoutes = defineStore('tagViewRoutes', () => {
         isTagsViewCurrentFull,
         tagViewRoutes,
         setTagViewRoutes,
+        addTagViewRoutes,
         setCurrentFullscreen,
     }
 })
