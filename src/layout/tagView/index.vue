@@ -1,8 +1,9 @@
 <template>
-    <div class="layout-navbar-tagsView" :class="{ 'layout-navbar-tagsView-shadow': getThemeConfig.layout === 'classic' }">
+    <div class="layout-tag-view" :class="{ 'layout-navbar-tagsView-shadow': getThemeConfig.layout === 'classic' }">
         <el-scrollbar ref="scrollbarRef">
             <ul ref="tagsUlRef" class="layout-navbar-tagsView-ul" :class="setTagsStyle">
-                <li v-for="(v, k) in tagViewState.tagViewRoutes" :key="k" ref="tagsRef">
+                <li v-for="(v, k) in tagViewState.tagViewRoutes" :key="k" ref="tagsRef" class="layout-tag-view-item" :class="{ 'is-active': isActive(v) }"
+                    @click="onTagClick(v)">
                     {{ v.meta?.title }}
                 </li>
                 <!-- <li v-for="(v, k) in state.tagsViewList" :key="k" :ref="(el: any) => { if (el) tagsRefs[k] = el; }
@@ -131,6 +132,11 @@ const initTagsView = async () => {
     // getTagsRefsIndex(getThemeConfig.value.isShareTagsView ? state.routePath : state.routeActive)
 }
 
+// 点击标签页
+const onTagClick = (row: RouteRecordCustom) => {
+    router.push(row)
+}
+
 // 页面加载前
 onBeforeMount(() => {
 
@@ -170,6 +176,21 @@ onBeforeRouteUpdate((val) => {
 </script>
 
 <style scoped lang="scss">
+.layout-tag-view {
+    background-color: var(--el-color-white);
+    border-bottom: 1px solid var(--next-border-color-light);
+    position: relative;
+
+    .layout-tag-view-item {
+        &.is-active,
+        &:hover {
+            background-color: var(--el-color-primary-light-9);
+            color: var(--el-color-primary);
+            border-color: var(--el-color-primary-light-5);
+        }
+    }
+}
+
 .layout-tagsView-name {
     // max-width: 200px;
     overflow: hidden;
