@@ -1,6 +1,5 @@
 import { nextTick } from 'vue'
 import type { App } from 'vue'
-import router from '@/router'
 
 // 引入组件
 // const SvgIcon = defineAsyncComponent(() => import('@/components/svgIcon/index.vue'))
@@ -40,7 +39,7 @@ export function elSvg(app: App) {
 
 /**
  * 设置 自定义 tagsView 名称
- * @param params 路由 query、params 中的 tagsViewName
+ * @param item 路由 query、params 中的 tagsViewName
  * @returns 返回当前 tagsViewName 名称
  */
 export function setTagsViewNameI18n(item: any) {
@@ -142,46 +141,9 @@ export function handleEmpty(list: EmptyArrayType) {
  * 打开外部链接
  * @param val 当前点击项菜单
  */
-export function handleOpenLink(val: RouteItem) {
-    const { origin, pathname } = window.location
-    router.push(val.path)
-    if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink)
-    else window.open(`${origin}${pathname}#${val.meta?.isLink}`)
-}
-
-/**
- * 统一批量导出
- * @method elSvg 导出全局注册 element plus svg 图标
- * @method useTitle 设置浏览器标题国际化
- * @method setTagsViewNameI18n 设置 自定义 tagsView 名称、 自定义 tagsView 名称国际化
- * @method lazyImg 图片懒加载
- * @method deepClone 对象深克隆
- * @method isMobile 判断是否是移动端
- * @method handleEmpty 判断数组对象中所有属性是否为空，为空则删除当前行对象
- */
-const other = {
-    elSvg: (app: App) => {
-        elSvg(app)
-    },
-    setTagsViewNameI18n(route: RouteToFrom) {
-        return setTagsViewNameI18n(route)
-    },
-    lazyImg: (el: string, arr: EmptyArrayType) => {
-        lazyImg(el, arr)
-    },
-    deepClone: (obj: EmptyObjectType) => {
-        return deepClone(obj)
-    },
-    isMobile: () => {
-        return isMobile()
-    },
-    handleEmpty: (list: EmptyArrayType) => {
-        return handleEmpty(list)
-    },
-    handleOpenLink: (val: RouteItem) => {
-        handleOpenLink(val)
-    },
-}
-
-// 统一批量导出
-export default other
+// export function handleOpenLink(val: RouteItem) {
+//     const { origin, pathname } = window.location
+//     router.push(val.path)
+//     if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink)
+//     else window.open(`${origin}${pathname}#${val.meta?.isLink}`)
+// }

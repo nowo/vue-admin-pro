@@ -10,6 +10,8 @@ declare module 'vue' {
     BaseIcon: typeof import('./../components/base/icon/BaseIcon.vue')['default']
     BaseIconSelect: typeof import('./../components/base/icon/BaseIconSelect.vue')['default']
     BaseIconSelector: typeof import('./../components/base/icon/BaseIconSelector.vue')['default']
+    CoFormTool: typeof import('./../components/co/CoFormTool.vue')['default']
+    CoTable: typeof import('./../components/co/CoTable.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAutocomplete: typeof import('element-plus/es')['ElAutocomplete']
